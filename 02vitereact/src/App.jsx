@@ -1,30 +1,48 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
 
-  let [counter,setCounter] = useState(1);
-  let [currentTab, setCurrentTab] = useState("feed");
+ 
+ 
+  let[timer,setTimer] = useState(true);
 
-  
-   //let counter =5
 
-  const addValue = () => {
-  if(counter === 10){
-      setCounter(counter =10)
-    }else{
+  useEffect(()=>{
+    setInterval(()=>{
+      setTimer(timer=> !timer);
+    },5000);
+    
+  },[])
+
+
+  return (
+    <>
+
+      <div>
+   
+       {timer && <Counter/>}
+      </div>
+
+      
+
+
+
+    </>
+  )
+}
+
+function Counter(){
+   let [counter,setCounter] = useState(0);
+
+   const addValue = () => {
       setCounter(currentValue => currentValue+1);
-
-    }
    }
 
    useEffect(()=>{
+    console.log("hi");
     setInterval(addValue,1000);
-
    },[]);
-   
 
    const removeValue = () => {
     if(counter === 0){
@@ -35,10 +53,11 @@ function App() {
     }
    }
 
-  return (
-    <>
+   
 
-      <div>
+
+  return <div>
+   
    
         <h1>heardCode</h1>
         <h2>Counter value: {counter}</h2>
@@ -48,7 +67,12 @@ function App() {
         <button onClick = {removeValue}>remove</button>
       </div>
 
-      <div style={{margin:20}}>
+}
+
+
+function Tab(){
+   let [currentTab, setCurrentTab] = useState("feed");
+  return <div style={{margin:20}}>
         <button 
         onClick = {function(){
           setCurrentTab(currentTab = "feed");
@@ -76,11 +100,9 @@ function App() {
         } }
         style = {{color:currentTab == "jobs"? "red": "white"}}
         >jobs</button>
-        
+
       </div>
 
-    </>
-  )
 }
 
 export default App
