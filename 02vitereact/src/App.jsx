@@ -36,22 +36,19 @@ function Counter(){
    let [counter,setCounter] = useState(0);
 
    const addValue = () => {
+    console.log("counter");
       setCounter(currentValue => currentValue+1);
    }
 
    useEffect(()=>{
     console.log("hi");
-    setInterval(addValue,1000);
+    let clock = setInterval(addValue,1000);
+    return function(){
+      clearInterval(clock);
+    }
    },[]);
 
-   const removeValue = () => {
-    if(counter === 0){
-      setCounter(counter =0)
-    }else{
-      setCounter(counter-1)
-
-    }
-   }
+   
 
    
 
@@ -63,8 +60,6 @@ function Counter(){
         <h2>Counter value: {counter}</h2>
 
         <button onClick={addValue}>Add value</button>
-        <br />
-        <button onClick = {removeValue}>remove</button>
       </div>
 
 }
